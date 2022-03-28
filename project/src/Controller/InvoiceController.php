@@ -17,6 +17,7 @@ class InvoiceController extends AbstractController
         ]);
     }
 
+    
     #[Route('/invoice/new', name: 'new_invoice')]
     public function new(): Response
     {
