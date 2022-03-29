@@ -24,13 +24,16 @@ class InvoiceLine
     private $quantity;
     
     #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
-    #[Assert\Regex("/^[0-9]{2}(\.[0-9])?$/", "Amount must be a decimal like 12.3")]
+    #[Assert\Regex("/^[0-9]{1,2}(\.[0-9])?$/", "Amount must be a valid decimal number ")]
     private $amount;
 
     #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
+    #[Assert\Regex("/^[0-9]{1,2}(\.[0-9])?$/", "Amount must be a valid decimal number ")]
     private $vat_amount;
 
     #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
+    #[Assert\Regex("/^[0-9]{1,2}(\.[0-9])?$/", "Amount must be a valid decimal number ")]
+
     private $total_with_vat;
 
     #[ORM\ManyToOne(targetEntity: Invoice::class, inversedBy: 'invoiceLines')]
@@ -113,12 +116,7 @@ class InvoiceLine
 
         return $this;
     }
-    // public function addInvoice(Invoice $invoice): void
-    // {
-    //     if (!$this->invoices->contains($invoice)) {
-    //         $this->invoices->add($invoice);
-    //     }
-    // }
+
     public function addInvoice(Invoice $invoice): void
     {
         if (!$invoice->invoiceLines->contains($this)) {

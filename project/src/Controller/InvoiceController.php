@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Invoice;
 use App\Entity\InvoiceLine;
 use App\Form\InvoiceType;
+use App\Repository\InvoiceRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class InvoiceController extends AbstractController
 {
     #[Route('/invoice', name: 'list_invoice')]
-    public function index(): Response
+    public function index(InvoiceRepository $invoiceRepository): Response
     {
         return $this->render('invoice/index.html.twig', [
-            'controller_name' => 'InvoiceController',
+            'invoices'=> $invoiceRepository->findAll()
         ]);
     }
     
