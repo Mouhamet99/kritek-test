@@ -3,52 +3,56 @@
 {% block title %}Invoice{% endblock %}
 
 {% block body %}
-<style>
-</style>
-{% for message in app.flashes('success') %}
-		<div class="alert alert-success alert-dismissible fade show" role="alert">
-			{{ message }}
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>
-</div>
-	{% endfor %}
+    <style>
+    </style>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        </div>
+    {% endfor %}
 
-<div class="container mt-5 mb-2 px-2">
-<div class="col-md-10 mx-auto">
-    <div class="mb-2 d-flex justify-content-between align-items-center">
-        <div class="position-relative"> <span class="position-absolute search"><i class="fa fa-search"></i></span> <input class="form-control w-100" placeholder="Search "> </div>
-        <div class="px-2"> <span>Invoice List <i class="fa fa-angle-down"></i></span> <i class="fa fa-ellipsis-h ms-3"></i> </div>
-      <a href="{{path('new_invoice')}}" class="btn btn-sm btn-primary">Add New Invoice</a>
-    </div>
-    <div class="table-responsive">
-        <table class="table table-responsive table-borderless">
-            <thead>
-                <tr class="bg-light">
-                    <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
-                    <th scope="col" width="5%">#</th>
-                    <th scope="col" width="20%">Date</th>
-                    <th scope="col" width="10%">Number</th>
-                    <th scope="col" width="20%">Customer</th>
-                    <th scope="col" class="text-end" width="20%"><span>Amount</span></th>
-                </tr>
-            </thead>
-            <tbody>
-              {% for invoice in invoices %}
-                <tr>
-                    <th scope="row"><input class="form-check-input" type="checkbox"></th>
-                    <td> {{invoice.id}}</td>
-                    <td> {{invoice.invoiceDate | date('d/m/Y')}}</td>
-                    <td> {{invoice.invoiceNumber}}</td>
-                    <td><img src="https://i.imgur.com/VKOeFyS.png" width="25"> {{invoice.customer.name}}</td>
-                    <td class="text-end"><span class="fw-bolder">$0.99</span> <i class="fa fa-ellipsis-h ms-2"></i></td>
-                </tr>
-              {% endfor %}
-               
-            </tbody>
-        </table>
-    </div>
-</div>
+    <div class="container mt-5 mb-2 px-2">
+        <div class="col-md-10 mx-auto">
+            <div class="mb-2 d-flex justify-content-between align-items-center">
+                <div class="position-relative"><span class="position-absolute search"><i
+                                class="fa fa-search"></i></span> <input class="form-control w-100"
+                                                                        placeholder="Search "></div>
+                <div class="px-2"><span>Invoice List <i class="fa fa-angle-down"></i></span> <i
+                            class="fa fa-ellipsis-h ms-3"></i></div>
+                <a href="{{ path('new_invoice') }}" class="btn btn-sm btn-primary">Add New Invoice</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-responsive table-borderless">
+                    <thead>
+                    <tr class="bg-light">
+                        <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
+                        <th scope="col" width="5%">#</th>
+                        <th scope="col" width="20%">Date</th>
+                        <th scope="col" width="10%">Number</th>
+                        <th scope="col" width="20%">Customer</th>
+                        <th scope="col" class="text-end" width="20%"><span>Amount</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for invoice in invoices %}
+                        <tr>
+                            <th scope="row"><input class="form-check-input" type="checkbox"></th>
+                            <td> {{ invoice.id }}</td>
+                            <td> {{ invoice.invoiceDate | date('d/m/Y') }}</td>
+                            <td> {{ invoice.invoiceNumber }}</td>
+                            <td><img src="https://i.imgur.com/VKOeFyS.png" width="25"> {{ invoice.customer.name }}</td>
+                            <td class="text-end"><span class="fw-bolder">$0.99</span> <i
+                                        class="fa fa-ellipsis-h ms-2"></i></td>
+                        </tr>
+                    {% endfor %}
 
-</div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}
 

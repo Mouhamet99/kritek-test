@@ -25,7 +25,6 @@ class InvoiceType extends AbstractType
             ->add('customer', EntityType::class, [
                 'class' => Customer::class,
                 'choice_label' => 'name',
-                'attr' => ['class' => '']
             ])
             ->add('invoiceLines', CollectionType::class, [
                 'entry_type'   => InvoiceLineType::class,
