@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class InvoiceController extends AbstractController
 {
-    #[Route('/invoice', name: 'app_invoice')]
+    #[Route('/invoice', name: 'list_invoice')]
     public function index(): Response
     {
         return $this->render('invoice/index.html.twig', [
@@ -35,11 +35,11 @@ class InvoiceController extends AbstractController
             $invoice = $form->getData();
             
             $em->persist($invoice);
-            dd($form->getData());
             $em->flush();
 
-            return $this->redirectToRoute('app_invoice');
-
+            $this->addFlash('success', 'Invoice Created Sucessfully!');
+            
+            return $this->redirectToRoute('list_invoice');
 
         }
 

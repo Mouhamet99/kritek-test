@@ -18,12 +18,12 @@ class Invoice
     private $id;
 
     #[ORM\Column(type: 'date')]
-    #[Assert\Date]
     private $invoice_date;
     
     #[ORM\Column(type: 'integer')]
     #[Assert\NotNull]
     #[Assert\Positive]
+    #[Assert\Unique]
     private $invoice_number;
 
     #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'invoices')]
