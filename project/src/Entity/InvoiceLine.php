@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\InvoiceLineRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: InvoiceLineRepository::class)]
 class InvoiceLine
@@ -13,19 +14,26 @@ class InvoiceLine
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'text', nullable: true)]
+    #[ORM\Column(type: 'text', nullable: false)]
+    #[Assert\NotBlank]
     private $description;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotNull]
+    #[Assert\PositiveOrZero]
     private $quantity;
-
+    
     #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
+    #[Assert\Regex("/^[0-9]{1,2}(\.[0-9])?$/", "Amount must be a valid decimal number ")]
     private $amount;
 
     #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
+    #[Assert\Regex("/^[0-9]{1,2}(\.[0-9])?$/", "Amount must be a valid decimal number ")]
     private $vat_amount;
 
     #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
+    #[Assert\Regex("/^[0-9]{1,2}(\.[0-9])?$/", "Amount must be a valid decimal number ")]
+
     private $total_with_vat;
 
     #[ORM\ManyToOne(targetEntity: Invoice::class, inversedBy: 'invoiceLines')]
@@ -108,12 +116,7 @@ class InvoiceLine
 
         return $this;
     }
-    // public function addInvoice(Invoice $invoice): void
-    // {
-    //     if (!$this->invoices->contains($invoice)) {
-    //         $this->invoices->add($invoice);
-    //     }
-    // }
+
     public function addInvoice(Invoice $invoice): void
     {
         if (!$invoice->invoiceLines->contains($this)) {
