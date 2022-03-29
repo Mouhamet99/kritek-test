@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Invoice
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5 mb-2">
+		<div class="row">
+			<div class="col-lg-10 mx-auto">
+				{{ form_start(form) }}
+				<div class="container-fluid">
+					<div class="">
+						<div class="col-9 col-push-2 offset-2">
+							<div class="card card-primary card-outline">
+								<form class="form-horizontal">
+									<div class="row">
+										<div class="card-body">
+											<div class="form-group row mt-2">
+												<div class="col-sm-5">
+													{{ form_label(form.invoice_date) }}
+												</div>
+												<div class="col-sm-7">
+													{{ form_widget(form.invoice_date)  }}
+												</div>
+											</div>
+											<div class="form-group row mt-2">
+												<div class="col-sm-5">
+													{{ form_label(form.invoice_number) }}
+												</div>
+												<div class="col-sm-7">
+													{{ form_widget(form.invoice_number,{'attr' : {'class':'mr-auto form-control'}})  }}
+												</div>
+											</div>
+											<div class="form-group row mt-2">
+												<div class="col-sm-5">
+													{{ form_label(form.customer) }}
+												</div>
+												<div class="col-sm-7">
+													{{ form_widget(form.customer,{'attr' : {'class':'mr-auto form-control'}})  }}
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+								<div class="card-tools text-right border-bottom text-end">
+								<button type="button" class="btn btn-sm btn-outline-dark add_item_link" data-collection-holder-class="invoices">Add new Line</button>
+								</div>
+								<div class="card-body table-responsive ">
+									<table id="facture" class=" table table-sm centered text-nowrap invoices" data-index="{{ form.invoiceLines|length }}" data-prototype-description="{{ form_widget(form.invoiceLines.vars.prototype.description)|e }}" data-prototype-quantity="{{ form_widget(form.invoiceLines.vars.prototype.quantity)|e }}" data-prototype-amount="{{ form_widget(form.invoiceLines.vars.prototype.amount)|e }}" data-prototype-vat-amount="{{ form_widget(form.invoiceLines.vars.prototype.vat_amount)|e }}" data-prototype-total-with-vat="{{ form_widget(form.invoiceLines.vars.prototype.total_with_vat)|e }}">
+										<thead class="thead-dark">
+											<th scope="col">#</th>
+											<th scope="col">Description</th>
+											<th scope="col">Quantity</th>
+											<th scope="col">Amount</th>
+											<th scope="col">VAT Amount</th>
+											<th scope="col">Total With VTA</th>
+											<th scope="col">actions</th>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+								<div
+									class="card-footer d-flex justify-content-end">
+									{# {{ form_widget(form._token) }} #}
+									<button type="reset" class="btn btn-default">Cancel</button>
+									<button type="submit" class="btn btn-primary">Save</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				{{ form_end(form,{'render_rest': false}) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+		window.addEventListener('DOMContentLoaded', function () {
+const addFormToCollection = (e) => {
+const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+const row = document.createElement('tr');
+
+for (let property in collectionHolder.dataset) {
+const column = document.createElement('td')
+column.innerHTML = collectionHolder.dataset[property]
+row.appendChild(column)
+}
+
+row.innerHTML = row.innerHTML.replace(/__name__/g, collectionHolder.dataset.index);
+collectionHolder.querySelector('tbody').appendChild(row);
+
+collectionHolder.dataset.index ++;
+};
+document.querySelectorAll('.add_item_link').forEach(btn => {
+btn.addEventListener("click", addFormToCollection)
+});
+})
+	</script>
+{% endblock %}
