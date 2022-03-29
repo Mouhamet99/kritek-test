@@ -35,6 +35,7 @@ class InvoiceController extends AbstractController
             $invoice = $form->getData();
             
             $em->persist($invoice);
+            dd($form->getData());
             $em->flush();
 
             return $this->redirectToRoute('app_invoice');

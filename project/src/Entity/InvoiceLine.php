@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\InvoiceLineRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: InvoiceLineRepository::class)]
 class InvoiceLine
@@ -13,13 +14,17 @@ class InvoiceLine
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'text', nullable: true)]
+    #[ORM\Column(type: 'text', nullable: false)]
+    #[Assert\NotBlank]
     private $description;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotNull]
+    #[Assert\PositiveOrZero]
     private $quantity;
-
+    
     #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
+    #[Assert\Regex("/^[0-9]{2}(\.[0-9])?$/", "Amount must be a decimal like 12.3")]
     private $amount;
 
     #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
