@@ -31,10 +31,16 @@ docker-compose build
 ```shell
 docker-compose up -d
 ```
-or alternatively
+or alternatively Run the following command if errors occurs 
 ```shell
 docker-compose -f "docker-compose.yml" up -d --build
 ```
+***
+📓Feel free to stop docker by running the following command and retype the command above
+```shell
+sudo systemctl stop docker
+```
+***
 
 
 ### Let's run our project directory in container
@@ -53,8 +59,7 @@ Open project on browser http://localhost:8741
 composer install  
 ```
 ### Configure our database in .env file
-Just add this line in .env file
-or Configure your own
+It's already Configure but you can Configure your own
 ```Terminal```
 ```env
 DATABASE_URL="mysql://root:@db_docker_symfony/db_kritek_test?serverVersion=5.7&charset=utf8mb4
