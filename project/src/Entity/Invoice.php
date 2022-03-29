@@ -22,8 +22,7 @@ class Invoice
     
     #[ORM\Column(type: 'integer')]
     #[Assert\NotNull]
-    #[Assert\Positive]
-    #[Assert\Unique]
+    #[Assert\PositiveOrZero]
     private $invoice_number;
 
     #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'invoices')]
@@ -100,7 +99,6 @@ class Invoice
     public function removeInvoiceLine(InvoiceLine $invoiceLine): self
     {
         if ($this->invoiceLines->removeElement($invoiceLine)) {
-            // set the owning side to null (unless already changed)
             if ($invoiceLine->getInvoice() === $this) {
                 $invoiceLine->setInvoice(null);
             }

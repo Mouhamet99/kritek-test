@@ -32,7 +32,7 @@
 												</div>
 												<div class="col-sm-8">
 													<div class="form-error">
-														{{ form_errors(form.invoice_number) }}
+														{{ form_errors(form.invoice_number, {'attr': {'class':'text-danger'}}) }}
 													</div>
 													{{ form_widget(form.invoice_number,{'attr' : {'class':'mr-auto form-control'}})  }}
 												</div>
@@ -42,9 +42,6 @@
 													{{ form_label(form.customer) }}
 												</div>
 												<div class="col-sm-8">
-													<div class="form-error">
-														{{ form_errors(form.invoice_number) }}
-													</div>
 													{{ form_widget(form.customer,{'attr' : {'class':'mr-auto form-control'}, 'placeholder': 'Select a customer'})  }}
 												</div>
 											</div>
