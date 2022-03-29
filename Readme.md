@@ -37,12 +37,7 @@ or alternatively Run the following command if errors occurs
 ```shell
 docker-compose -f "docker-compose.yml" up -d --build
 ```
-***
-📓Feel free to stop docker by running the following command and retype the command above
-```shell
-sudo systemctl stop docker
-```
-***
+
 
 
 ### Let's run our project directory in container
