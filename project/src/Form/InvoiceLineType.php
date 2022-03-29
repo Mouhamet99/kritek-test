@@ -17,9 +17,9 @@ class InvoiceLineType extends AbstractType
         $builder
             ->add('description', TextType::class,['label'=>false,'attr' => ['class' => 'd-inline-block w-75']])
             ->add('quantity', IntegerType::class,['label'=>false,'attr' => ['class' => 'd-inline-block w-75']])
-            ->add('amount', MoneyType::class,['label'=>false,'attr' => ['class' => 'd-inline-block w-75']])
-            ->add('vat_amount', MoneyType::class,['label'=>false,'attr' => ['class' => 'd-inline-block w-75']])
-            ->add('total_with_vat', MoneyType::class,['label'=>false,'attr' => ['class' => 'd-inline-block w-75']]);
+            ->add('amount', MoneyType::class,['currency'=>'','grouping'=>true, 'scale'=>2,'label'=>false,'attr' => ['class' => 'd-inline-block w-75']])
+            ->add('vat_amount', MoneyType::class,['currency'=>'','grouping'=>true, 'scale'=>2,'label'=>false,'attr' => ['class' => 'd-inline-block w-75']])
+            ->add('total_with_vat', MoneyType::class,['currency'=>'','grouping'=>true, 'scale'=>2,'label'=>false,'attr' => ['class' => 'd-inline-block w-75']]);
         
     }
 

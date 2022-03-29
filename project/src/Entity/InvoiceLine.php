@@ -108,4 +108,17 @@ class InvoiceLine
 
         return $this;
     }
+    // public function addInvoice(Invoice $invoice): void
+    // {
+    //     if (!$this->invoices->contains($invoice)) {
+    //         $this->invoices->add($invoice);
+    //     }
+    // }
+    public function addInvoice(Invoice $invoice): void
+    {
+        if (!$invoice->invoiceLines->contains($this)) {
+            $this->setInvoice($invoice);
+        }
+    }
+ 
 }

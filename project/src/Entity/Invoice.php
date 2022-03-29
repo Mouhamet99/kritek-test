@@ -25,7 +25,7 @@ class Invoice
     #[ORM\JoinColumn(nullable: false)]
     private $customer;
 
-    #[ORM\OneToMany(mappedBy: 'invoice', targetEntity: InvoiceLine::class)]
+    #[ORM\OneToMany(mappedBy: 'invoice', targetEntity: InvoiceLine::class,cascade:["persist"] )]
     private $invoiceLines;
 
     public function __construct()
@@ -103,4 +103,5 @@ class Invoice
 
         return $this;
     }
+
 }

@@ -18,20 +18,22 @@ class InvoiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('invoice_date', DateType::class)
+            ->add('invoice_date', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd'
+            ])
             ->add('invoice_number', NumberType::class)
             ->add('customer', EntityType::class, [
                 'class' => Customer::class,
                 'choice_label' => 'name',
                 'attr' => ['class' => '']
             ])
-            ->add('invoiceLines',CollectionType::class,[
+            ->add('invoiceLines', CollectionType::class, [
                 'entry_type'   => InvoiceLineType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                
-            ])
-            ;
+                'by_reference' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

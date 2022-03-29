@@ -16,27 +16,27 @@
 									<div class="row">
 										<div class="card-body">
 											<div class="form-group row mt-2">
-												<div class="col-sm-5">
+												<div class="col-sm-4">
 													{{ form_label(form.invoice_date) }}
 												</div>
-												<div class="col-sm-7">
-													{{ form_widget(form.invoice_date)  }}
+												<div class="col-sm-8">
+													{{ form_widget(form.invoice_date , {'attr' : {'class':'mr-auto form-control'}})   }}
 												</div>
 											</div>
 											<div class="form-group row mt-2">
-												<div class="col-sm-5">
+												<div class="col-sm-4">
 													{{ form_label(form.invoice_number) }}
 												</div>
-												<div class="col-sm-7">
+												<div class="col-sm-8">
 													{{ form_widget(form.invoice_number,{'attr' : {'class':'mr-auto form-control'}})  }}
 												</div>
 											</div>
 											<div class="form-group row mt-2">
-												<div class="col-sm-5">
+												<div class="col-sm-4">
 													{{ form_label(form.customer) }}
 												</div>
-												<div class="col-sm-7">
-													{{ form_widget(form.customer,{'attr' : {'class':'mr-auto form-control'}})  }}
+												<div class="col-sm-8">
+													{{ form_widget(form.customer,{'attr' : {'class':'mr-auto form-control'}, 'placeholder': 'Select a customer'})  }}
 												</div>
 											</div>
 										</div>
@@ -62,7 +62,7 @@
 								</div>
 								<div
 									class="card-footer d-flex justify-content-end">
-									{# {{ form_widget(form._token) }} #}
+									{{ form_widget(form._token) }}
 									<button type="reset" class="btn btn-default">Cancel</button>
 									<button type="submit" class="btn btn-primary">Save</button>
 								</div>
